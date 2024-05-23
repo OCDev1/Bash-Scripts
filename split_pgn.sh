@@ -48,7 +48,7 @@ split_pgn_file() {
             fi
         fi
         # append new line to the file with new line character
-        game_content+="$line"$'\n'
+        game_content+="$line"
     done < "$input_file"    # for the last game, not handled in the loop 
 
     if [ -n "$game_content" ]; then
