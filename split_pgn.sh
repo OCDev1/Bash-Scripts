@@ -77,4 +77,4 @@ create_dir_if_not_exist "$dest_dir"
 # Split the PGN file into individual game PGN files
 split_pgn_file "$input_file" "$dest_dir"
 
-echo "Split completed. Games saved in '$dest_dir'."
+echo "All games have been split and saved to '$dest_dir'."
