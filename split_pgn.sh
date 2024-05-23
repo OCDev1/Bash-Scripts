@@ -39,7 +39,8 @@ split_pgn_file() {
             # if game content is not empty, write it to the corresponding file.
             if [ -n "$game_content" ];
             then
-                echo "$game_content" > "$dest_dir/game_$game_index.pgn"
+                echo "$game_content" > "$dest_dir/$(basename "$input_file" .pgn)_$game_index.pgn"
+                echo "Saved game to $dest_dir/$(basename "$input_file" .pgn)_$game_index.pgn"
 
                 # increment the index and clear the content var for the next game.
                 game_index=$((game_index + 1))  
@@ -51,7 +52,8 @@ split_pgn_file() {
     done < "$input_file"    # for the last game, not handled in the loop 
 
     if [ -n "$game_content" ]; then
-        echo "$game_content" > "$dest_dir/game_$game_index.pgn"
+        echo "$game_content" > "$dest_dir/$(basename "$input_file" .pgn)_$game_index.pgn"
+        echo "Saved game to $dest_dir/$(basename "$input_file" .pgn)_$game_index.pgn"
     fi
 }
 
