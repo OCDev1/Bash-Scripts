@@ -47,7 +47,7 @@ move_backward() {
         done
         display_board
     else
-        init_board
+        display_board
     fi
 }
 
