@@ -110,8 +110,11 @@ fi
 # Initialize the chess board
 init_board
 
+metadata=$(grep -E '^\[.*\]$' "$1")
+
 echo "Metadata from PGN file:"
-cat "$1" | grep -E "\[Event|Site|Date|Round|White|Black|Result|WhiteElo|BlackElo|EventDate|ECO \]"
+echo "$metadata"
+# cat "$1" | grep -E "\[Event|Site|Date|Round|White|Black|Result|WhiteElo|BlackElo|EventDate|ECO \]"
 
 # Parse moves from PGN file using parse_moves.py
 # Extract moves from the PGN file, excluding metadata
