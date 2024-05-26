@@ -47,7 +47,7 @@ move_backward() {
         done
         display_board
     else
-        echo "Already at the start."
+        init_board
     fi
 }
 
