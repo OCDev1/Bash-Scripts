@@ -72,6 +72,7 @@ move_to_end() {
 }
 
 # Function to update the board after a move
+# Function to update the board after a move
 update_board() {
     move=$1
     if [ -z "$move" ]; then
@@ -79,10 +80,6 @@ update_board() {
         return 1
     fi
 
-    if [[ ! $move =~ ^[a-h][1-8][a-h][1-8]$ ]]; then
-        echo "Error: Invalid move format: $move"
-        return 1
-    fi
 
     from_col=$(( ( ( $(printf "%d" "'${move:0:1}") - 97 ) * 2 ) ))
     from_row=$(( 8 - ${move:1:1} ))
@@ -91,8 +88,17 @@ update_board() {
 
     piece=${board[$from_row]:$from_col:1}
     board[$from_row]="${board[$from_row]:0:$from_col}.${board[$from_row]:$((from_col + 1))}"
-    board[$to_row]="${board[$to_row]:0:$to_col}$piece${board[$to_row]:$((to_col + 1))}"
+
+    if [ ${#move} -eq 5 ]; then
+        # Handle pawn promotion
+        promotion_piece=${move:4:1}
+        echo "$promotion_piece"
+        board[$to_row]="${board[$to_row]:0:$to_col}$promotion_piece${board[$to_row]:$((to_col + 1))}"
+    else
+        board[$to_row]="${board[$to_row]:0:$to_col}$piece${board[$to_row]:$((to_col + 1))}"
+    fi
 }
+
 # Main script
 
 # Check if the correct number of arguments is provided
