@@ -25,8 +25,9 @@ void print_history() {
 }
 
 void cd(char *path) {
-    if (chdir(path) != 0) {
-        perror("cd");
+    int change = chdir(path);
+    if (change != 0) {
+        perror("chdir failed");
     }
 }
 
@@ -77,7 +78,7 @@ int main(int argc, char *argv[]) {
             if (arg_count == 2) {
                 cd(args[1]);
             } else {
-                printf("Usage: cd <directory>\n");
+                cd("");
             }
         } else if (strcmp(args[0], "pwd") == 0) {
             pwd();
