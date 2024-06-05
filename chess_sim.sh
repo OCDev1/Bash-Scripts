@@ -2,10 +2,10 @@
 
 # Function to display the chess board
 display_board() {
-    echo -e "\nMove $move_count/$total_moves"
+    echo "Move $move_count/$total_moves"
     echo "  a b c d e f g h"
     for ((i = 0; i < 8; i++)); do
-        echo "$((8 - i)) ${board[$i]}  $((8 - i))"
+        echo "$((8 - i)) ${board[$i]} $((8 - i))"
     done
     echo "  a b c d e f g h"
 }
@@ -20,8 +20,7 @@ init_board() {
         ". . . . . . . ."
         ". . . . . . . ."
         "P P P P P P P P"
-        "R N B Q K B N R"
-    )
+        "R N B Q K B N R")
 }
 
 # Function to handle moving forward
@@ -74,13 +73,9 @@ move_to_end() {
 # Function to update the board after a move
 update_board() {
     move=$1
-    if [ -z "$move" ]; then
-        echo "Error: Move string is empty."
-        return 1
-    fi
+
 
     if [[ ! $move =~ ^[a-h][1-8][a-h][1-8][QRBNqrbn]?$ ]]; then
-        echo "Error: Invalid move format: $move"
         return 1
     fi
 
@@ -126,6 +121,7 @@ metadata=$(grep -E '^\[.*\]$' "$1")
 
 echo "Metadata from PGN file:"
 echo "$metadata"
+echo ""
 # cat "$1" | grep -E "\[Event|Site|Date|Round|White|Black|Result|WhiteElo|BlackElo|EventDate|ECO \]"
 
 # Parse moves from PGN file using parse_moves.py
@@ -148,7 +144,8 @@ display_board
 
 # Interactive loop for user input
 while true; do
-    read -n 1 -p "Press 'd' to move forward, 'a' to move back, 'w' to go to the start, 's' to go to the end, 'q' to quit: " key
+    echo -n "Press 'd' to move forward, 'a' to move back, 'w' to go to the start, 's' to go to the end, 'q' to quit:"
+    read key
     echo ""
 
     case $key in
@@ -156,7 +153,7 @@ while true; do
     a) move_backward ;;
     w) reset_to_start ;;
     s) move_to_end ;;
-    q) echo "Exiting."; exit 0 ;;
+    q) echo "Exiting.";echo "End of game." ;exit 0 ;;
     *) echo "Invalid key pressed: $key" ;;
     esac
 done
