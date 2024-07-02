@@ -1,2 +1,2 @@
-# os-ex1
-Repo for exercise 1 in Operating systems course at BIU
+# BASH
+Bash scripts for parsing and displaying chess games encoded in PGN format for exercise in Operating systems course at BIU
